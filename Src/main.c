@@ -100,7 +100,7 @@ int main(void)
 
 // iicsearch();
 
-	hmc5883lInit();
+	//hmc5883lInit();
 
   /* USER CODE END 2 */
 

@@ -7,8 +7,8 @@ HeaderPath=..\Drivers\STM32F4xx_HAL_Driver\Inc;..\Drivers\STM32F4xx_HAL_Driver\I
 CDefines=USE_HAL_DRIVER;STM32F405xx;USE_HAL_DRIVER;USE_HAL_DRIVER;
 
 [PreviousGenFiles]
-HeaderPath=C:/Users/liangyuezhe/Desktop/405 - 副本/405/Inc
+HeaderPath=C:/Users/liangyuezhe/Documents/GitHub/ATK405TESE/Inc
 HeaderFiles=gpio.h;spi.h;tim.h;stm32f4xx_it.h;stm32f4xx_hal_conf.h;main.h;
-SourcePath=C:/Users/liangyuezhe/Desktop/405 - 副本/405/Src
+SourcePath=C:/Users/liangyuezhe/Documents/GitHub/ATK405TESE/Src
 SourceFiles=gpio.c;spi.c;tim.c;stm32f4xx_it.c;stm32f4xx_hal_msp.c;main.c;
 
