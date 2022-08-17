@@ -110,7 +110,7 @@ int main(void)
 		PCA9685_SetServoAngle(1, 90);
 		PCA9685_SetServoAngle(2, 90);
 		PCA9685_SetServoAngle(3, 90);
-  iicsearch();
+ // iicsearch();
 
 	//hmc5883lInit();
 
