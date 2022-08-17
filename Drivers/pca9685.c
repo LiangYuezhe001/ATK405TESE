@@ -87,7 +87,7 @@ PCA9685_STATUS PCA9685_SetPwm(uint8_t Channel, uint16_t OnTime, uint16_t OffTime
 	Message[1] = OnTime>>8;
 	Message[2] = OffTime & 0xFF;
 	Message[3] = OffTime>>8;
-	//i2cdevWrite(0, PCA9685_ADDRESS, RegisterAddress, 4, Message);
+
 	if(HAL_OK != i2cdevWrite(0, PCA9685_ADDRESS, RegisterAddress, 4, Message))
 	{
 		return PCA9685_ERROR;
@@ -99,34 +99,34 @@ PCA9685_STATUS PCA9685_SetPwm(uint8_t Channel, uint16_t OnTime, uint16_t OffTime
 PCA9685_STATUS PCA9685_SetPin(uint8_t Channel, uint16_t Value, uint8_t Invert)
 {
   if(Value > 4095) Value = 4095;
-
-  if (Invert)
-		{
-    if (Value == 0) {
-      // Special value for signal fully on.
-      return PCA9685_SetPwm(Channel, 4096, 0);
-    }
-    else if (Value == 4095) {
-      // Special value for signal fully off.
-    	return PCA9685_SetPwm(Channel, 0, 4096);
-    }
-    else {
-    	return PCA9685_SetPwm(Channel, 0, 4095-Value);
-    }
-  }
-  else {
-    if (Value == 4095) {
-      // Special value for signal fully on.
-    	return PCA9685_SetPwm(Channel, 4096, 0);
-    }
-    else if (Value == 0) {
-      // Special value for signal fully off.
-    	return PCA9685_SetPwm(Channel, 0, 4096);
-    }
-    else {
-    	return PCA9685_SetPwm(Channel, 0, Value);
-    }
-  }
+	if(Value < 1) Value = 1;
+//  if (Invert)
+//		{
+//    if (Value == 0) {
+//      // Special value for signal fully on.
+//      return PCA9685_SetPwm(Channel, 4096, 0);
+//    }
+//    else if (Value == 4095) {
+//      // Special value for signal fully off.
+//    	return PCA9685_SetPwm(Channel, 0, 4096);
+//    }
+//    else {
+//    	return PCA9685_SetPwm(Channel, 0, 4095-Value);
+//    }
+//  }
+//  else {
+//    if (Value == 4095) {
+//      // Special value for signal fully on.
+//    	return PCA9685_SetPwm(Channel, 4096, 0);
+//    }
+//    else if (Value == 0) {
+//      // Special value for signal fully off.
+//    	return PCA9685_SetPwm(Channel, 0, 4096);
+//    }
+//    else {
+//    	return PCA9685_SetPwm(Channel, 0, Value);
+//    }
+//  }
 		return PCA9685_SetPwm(Channel, 0, Value);
 }
 
@@ -134,8 +134,8 @@ PCA9685_STATUS PCA9685_SetPin(uint8_t Channel, uint16_t Value, uint8_t Invert)
 PCA9685_STATUS PCA9685_SetServoAngle(uint8_t Channel, float Angle)
 {
 	float Value;
-	if(Angle < MIN_ANGLE) Angle = MIN_ANGLE;
-	if(Angle > MAX_ANGLE) Angle = MAX_ANGLE;
+//	if(Angle < MIN_ANGLE) Angle = MIN_ANGLE;
+//	if(Angle > MAX_ANGLE) Angle = MAX_ANGLE;
 
 	Value = (Angle - MIN_ANGLE) * ((float)SERVO_MAX - (float)SERVO_MIN) / (MAX_ANGLE - MIN_ANGLE) + (float)SERVO_MIN;
 

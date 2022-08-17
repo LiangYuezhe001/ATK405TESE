@@ -35,7 +35,7 @@ void SOFT_I2C_SDA_IN(void)
 void SOFT_I2C_Delay(void)
 {
 	//HAL_Delay(1);
-	delay_us(3);
+	delay_us(1);
 }
 //²úÉúIIC
 void SOFT_I2C_Start(void)
