@@ -26,35 +26,7 @@ Project File Date:  08/18/2022
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
-Rebuild target '405'
-assembling startup_stm32f405xx.s...
-compiling stm32f4xx_hal_flash_ex.c...
-compiling stm32f4xx_hal_flash_ramfunc.c...
-compiling stm32f4xx_it.c...
-..\Drivers\soft_i2c.h(10): warning:  #1-D: last line of file ends without a newline
-  void iicsearch(void);
-../Src/stm32f4xx_it.c: 1 warning, 0 errors
-compiling spi.c...
-..\Drivers\soft_i2c.h(10): warning:  #1-D: last line of file ends without a newline
-  void iicsearch(void);
-../Src/spi.c: 1 warning, 0 errors
-compiling stm32f4xx_hal_msp.c...
-..\Drivers\soft_i2c.h(10): warning:  #1-D: last line of file ends without a newline
-  void iicsearch(void);
-../Src/stm32f4xx_hal_msp.c: 1 warning, 0 errors
-compiling stm32f4xx_hal_rcc.c...
-compiling stm32f4xx_hal_gpio.c...
-compiling tim.c...
-..\Drivers\soft_i2c.h(10): warning:  #1-D: last line of file ends without a newline
-  void iicsearch(void);
-../Src/tim.c: 1 warning, 0 errors
-compiling stm32f4xx_hal_rcc_ex.c...
-compiling stm32f4xx_hal_dma_ex.c...
-compiling gpio.c...
-..\Drivers\soft_i2c.h(10): warning:  #1-D: last line of file ends without a newline
-  void iicsearch(void);
-../Src/gpio.c: 1 warning, 0 errors
-compiling stm32f4xx_hal_flash.c...
+Build target '405'
 compiling main.c...
 ..\Drivers\soft_i2c.h(10): warning:  #1-D: last line of file ends without a newline
   void iicsearch(void);
@@ -65,71 +37,10 @@ compiling main.c...
 ..\Drivers\pca9685.h(80): warning:  #1295-D: Deprecated declaration PCA9685_Init - give arg types
   PCA9685_STATUS PCA9685_Init();
 ../Src/main.c: 4 warnings, 0 errors
-compiling usart.c...
-..\Drivers\soft_i2c.h(10): warning:  #1-D: last line of file ends without a newline
-  void iicsearch(void);
-../Src/usart.c: 1 warning, 0 errors
-compiling stm32f4xx_hal_spi.c...
-compiling stm32f4xx_hal_exti.c...
-compiling stm32f4xx_hal_cortex.c...
-compiling stm32f4xx_hal_pwr.c...
-compiling stm32f4xx_hal_pwr_ex.c...
-compiling stm32f4xx_hal.c...
-compiling mpu6000.c...
-..\Drivers\soft_i2c.h(10): warning:  #1-D: last line of file ends without a newline
-  void iicsearch(void);
-..\Drivers\mpu6000.c: 1 warning, 0 errors
-compiling soft_i2c.c...
-..\Drivers\soft_i2c.h(10): warning:  #1-D: last line of file ends without a newline
-  void iicsearch(void);
-..\Drivers\soft_i2c.h(10): warning:  #1-D: last line of file ends without a newline
-  void iicsearch(void);
-..\Drivers\soft_i2c.c(180): warning:  #177-D: variable "res"  was declared but never referenced
-  	u8 res;
-..\Drivers\soft_i2c.c(322): warning:  #1-D: last line of file ends without a newline
-   }
-..\Drivers\soft_i2c.c(307): warning:  #177-D: variable "count"  was declared but never referenced
-  		u8 i,j=0,count,add[10]={0,0,0,0,0,0,0,0,0,0};
-..\Drivers\soft_i2c.c(307): warning:  #550-D: variable "add"  was set but never used
-  		u8 i,j=0,count,add[10]={0,0,0,0,0,0,0,0,0,0};
-..\Drivers\soft_i2c.c: 6 warnings, 0 errors
-compiling bmp280.c...
-..\Drivers\soft_i2c.h(10): warning:  #1-D: last line of file ends without a newline
-  void iicsearch(void);
-..\Drivers\soft_i2c.h(10): warning:  #1-D: last line of file ends without a newline
-  void iicsearch(void);
-..\Drivers\bmp280.c: 2 warnings, 0 errors
-compiling ppm_signal.c...
-..\Drivers\soft_i2c.h(10): warning:  #1-D: last line of file ends without a newline
-  void iicsearch(void);
-ppm_signal.c(30): warning:  #1-D: last line of file ends without a newline
-  }
-ppm_signal.c: 2 warnings, 0 errors
-compiling hmc5883l.c...
-..\Drivers\soft_i2c.h(10): warning:  #1-D: last line of file ends without a newline
-  void iicsearch(void);
-..\Drivers\hmc5883l.c: 1 warning, 0 errors
-compiling stm32f4xx_hal_uart.c...
-compiling stm32f4xx_hal_dma.c...
-compiling system_stm32f4xx.c...
-compiling stm32f4xx_hal_tim.c...
-compiling stm32f4xx_hal_tim_ex.c...
-compiling pca9685.c...
-..\Drivers\soft_i2c.h(10): warning:  #1-D: last line of file ends without a newline
-  void iicsearch(void);
-..\Drivers\pca9685.h(80): warning:  #1295-D: Deprecated declaration PCA9685_Init - give arg types
-  PCA9685_STATUS PCA9685_Init();
-..\Drivers\pca9685.c(66): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-  		PrescalerVal = (25000000 / (4096.0 * (float)Frequency)) - 1;
-..\Drivers\pca9685.c(67): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-  		Prescale = floor(PrescalerVal + 0.5);
-..\Drivers\pca9685.c(140): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-  	Value = (Angle - MIN_ANGLE) * ((float)SERVO_MAX - (float)SERVO_MIN) / (MAX_ANGLE - MIN_ANGLE) + (float)SERVO_MIN;
-..\Drivers\pca9685.c: 5 warnings, 0 errors
 linking...
 Program Size: Code=11316 RO-data=448 RW-data=56 ZI-data=1368  
 FromELF: creating hex file...
-"405\405.axf" - 0 Error(s), 27 Warning(s).
+"405\405.axf" - 0 Error(s), 4 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -152,7 +63,7 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.1.2
-Build Time Elapsed:  00:00:06
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>
