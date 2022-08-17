@@ -31,8 +31,10 @@
 405\ppm_signal.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h
 405\ppm_signal.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 405\ppm_signal.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
+405\ppm_signal.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 405\ppm_signal.o: ..\Drivers\mpu6000.h
 405\ppm_signal.o: ../Inc/tim.h
 405\ppm_signal.o: ../Inc/main.h
 405\ppm_signal.o: ../Inc/gpio.h
 405\ppm_signal.o: ..\Drivers\soft_i2c.h
+405\ppm_signal.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h

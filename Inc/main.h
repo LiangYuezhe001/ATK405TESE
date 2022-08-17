@@ -36,6 +36,8 @@ extern "C" {
 #include "tim.h"
 #include "gpio.h"
 #include "soft_i2c.h"
+#include <math.h>
+
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/

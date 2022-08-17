@@ -31,9 +31,11 @@
 405\soft_i2c.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h
 405\soft_i2c.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 405\soft_i2c.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
+405\soft_i2c.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 405\soft_i2c.o: ..\Drivers\mpu6000.h
 405\soft_i2c.o: ../Inc/tim.h
 405\soft_i2c.o: ../Inc/main.h
 405\soft_i2c.o: ../Inc/gpio.h
 405\soft_i2c.o: ..\Drivers\soft_i2c.h
+405\soft_i2c.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 405\soft_i2c.o: ..\Drivers\soft_i2c.h

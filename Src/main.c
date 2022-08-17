@@ -21,6 +21,7 @@
 #include "main.h"
 #include "spi.h"
 #include "tim.h"
+#include "usart.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -29,6 +30,7 @@
 #include "hmc5883l.h"
 #include "soft_i2c.h"
 #include "bmp280.h"
+#include "pca9685.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -59,9 +61,10 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-u8 i=1;
-float Altitude;
-
+u8 i=0;
+float Altitude,angle1=90,angle2=90,angle3=90,angle4=90;
+u8 DATA=0;
+extern u16 rc_sginal[11];
 /* USER CODE END 0 */
 
 /**
@@ -94,16 +97,20 @@ int main(void)
   MX_GPIO_Init();
   MX_SPI1_Init();
   MX_TIM7_Init();
+  MX_UART4_Init();
   MX_TIM9_Init();
   /* USER CODE BEGIN 2 */
-	mpu6000Init();
-	bmp280Init();
-
-// iicsearch();
+//	mpu6000Init();
+	PCA9685_Init();
+	//bmp280Init();
+		PCA9685_SetServoAngle(0, 90);
+		PCA9685_SetServoAngle(1, 90);
+		PCA9685_SetServoAngle(2, 90);
+		PCA9685_SetServoAngle(3, 90);
+ // iicsearch();
 
 	//hmc5883lInit();
-		//HAL_TIM_Base_Start_IT(&htim9);
-		//HAL_TIM_IC_Start(&htim9,TIM_CHANNEL_2);
+
 		HAL_TIM_IC_Start_IT(&htim9,TIM_CHANNEL_2);
   /* USER CODE END 2 */
 
@@ -111,14 +118,14 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-//		GPIO_Set(GPIOB,PIN9,GPIO_MODE_OUT,GPIO_OTYPE_PP,GPIO_SPEED_100M,GPIO_PUPD_PU);
-//		PBout(9)=1;
-//		
-//		HAL_Delay(10);
-//		GPIO_Set(GPIOB,PIN9,GPIO_MODE_IN,GPIO_OTYPE_PP,GPIO_SPEED_100M,GPIO_PUPD_PU);
-//		HAL_Delay(10);
 
-	//	Altitude=bmp280getAltitude();
+		PCA9685_SetServoAngle(0, angle1);
+		PCA9685_SetServoAngle(1, angle1);
+		PCA9685_SetServoAngle(2, angle1);
+		PCA9685_SetServoAngle(3, angle1);
+		//angle1=angle1+.1;
+		if(angle1>=110)angle1=70;
+		//Altitude=bmp280getAltitude();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -167,9 +174,6 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  /** Enables the Clock Security System
-  */
-  HAL_RCC_EnableCSS();
 }
 
 /* USER CODE BEGIN 4 */

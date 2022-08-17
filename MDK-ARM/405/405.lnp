@@ -4,6 +4,7 @@
 "405\gpio.o"
 "405\spi.o"
 "405\tim.o"
+"405\usart.o"
 "405\stm32f4xx_it.o"
 "405\stm32f4xx_hal_msp.o"
 "405\stm32f4xx_hal_spi.o"
@@ -22,12 +23,14 @@
 "405\stm32f4xx_hal_exti.o"
 "405\stm32f4xx_hal_tim.o"
 "405\stm32f4xx_hal_tim_ex.o"
+"405\stm32f4xx_hal_uart.o"
 "405\system_stm32f4xx.o"
 "405\mpu6000.o"
 "405\soft_i2c.o"
 "405\hmc5883l.o"
 "405\bmp280.o"
 "405\ppm_signal.o"
+"405\pca9685.o"
 --library_type=microlib --strict --scatter "405\405.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
