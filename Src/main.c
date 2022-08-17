@@ -39,6 +39,8 @@
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
+#define MAX_ANGLE_A 115
+#define MIN_ANGLE_A 65
 /* USER CODE BEGIN PD */
 /* USER CODE END PD */
 
@@ -62,9 +64,10 @@ void SystemClock_Config(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 u8 i=0;
-float Altitude,angle1=90,angle2=90,angle3=90,angle4=90;
+float Altitude;
 u8 DATA=0;
 extern u16 rc_sginal[11];
+float rc_channel[10],angle[5]={90};
 /* USER CODE END 0 */
 
 /**
@@ -107,7 +110,7 @@ int main(void)
 		PCA9685_SetServoAngle(1, 90);
 		PCA9685_SetServoAngle(2, 90);
 		PCA9685_SetServoAngle(3, 90);
- // iicsearch();
+  iicsearch();
 
 	//hmc5883lInit();
 
@@ -117,14 +120,31 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
-  {
-
-		PCA9685_SetServoAngle(0, angle1);
-		PCA9685_SetServoAngle(1, angle1);
-		PCA9685_SetServoAngle(2, angle1);
-		PCA9685_SetServoAngle(3, angle1);
-		//angle1=angle1+.1;
-		if(angle1>=110)angle1=70;
+  { for(int cnt=0;cnt<5;cnt++)
+		{
+		rc_channel[cnt]=((float)rc_sginal[cnt+1]-1000.0f)/1000.0f;
+	}
+		for(int cnt=0;cnt<5;cnt++)
+		{
+		angle[cnt]=65+rc_channel[3]*50;
+			if(cnt==0)angle[cnt]=angle[cnt]+rc_channel[1]*50-25;
+			if(cnt==2)angle[cnt]=angle[cnt]-rc_channel[1]*50+25;
+			if(cnt==1)angle[cnt]=angle[cnt]+rc_channel[0]*50-25;
+			if(cnt==3)angle[cnt]=angle[cnt]-rc_channel[0]*50+25;
+			
+			
+	}
+	
+		for(int cnt=0;cnt<5;cnt++)
+	{
+		if(angle[cnt]<=MIN_ANGLE_A)angle[cnt]=MIN_ANGLE_A;
+		if(angle[cnt]>=MAX_ANGLE_A)angle[cnt]=MAX_ANGLE_A;
+	}
+	for(int cnt=0;cnt<5;cnt++){
+		PCA9685_SetServoAngle(cnt, angle[cnt]);
+	}
+	
+		
 		//Altitude=bmp280getAltitude();
     /* USER CODE END WHILE */
 
