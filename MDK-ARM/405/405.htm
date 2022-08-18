@@ -3,11 +3,11 @@
 <title>Static Call Graph - [405\405.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image 405\405.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Thu Aug 18 16:15:39 2022
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Thu Aug 18 17:12:50 2022
 <BR><P>
-<H3>Maximum Stack Usage =        216 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =        208 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
-main &rArr; PCA9685_Init &rArr; PCA9685_SetPwmFrequency &rArr; PCA9685_SleepMode &rArr; PCA9685_SetBit &rArr; i2cdevWriteBit &rArr; i2cdevReadByte &rArr; SOFT_I2C_Read_Byte &rArr; SOFT_I2C_NAck &rArr; SOFT_I2C_SDA_OUT &rArr; GPIO_Set
+main &rArr; PCA9685_Init &rArr; PCA9685_SetPwmFrequency &rArr; PCA9685_SleepMode &rArr; PCA9685_SetBit &rArr; i2cdevWriteBit &rArr; i2cdevReadByte &rArr; SOFT_I2C_Read_Byte &rArr; SOFT_I2C_SDA_OUT &rArr; GPIO_Set
 <P>
 <H3>
 Mutually Recursive functions
@@ -555,8 +555,8 @@ Global Symbols
 <P><STRONG><a name="[ba]"></a>GPIO_Set</STRONG> (Thumb, 222 bytes, Stack size 32 bytes, gpio.o(i.GPIO_Set))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = GPIO_Set
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_SDA_OUT
-<LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_SDA_IN
+<BR>[Called By]<UL><LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_SDA_OUT
+<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_SDA_IN
 </UL>
 
 <P><STRONG><a name="[82]"></a>HAL_GPIO_Init</STRONG> (Thumb, 466 bytes, Stack size 24 bytes, stm32f4xx_hal_gpio.o(i.HAL_GPIO_Init))
@@ -727,11 +727,11 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[c2]"></a>HAL_TIM_Base_Start</STRONG> (Thumb, 42 bytes, Stack size 0 bytes, stm32f4xx_hal_tim.o(i.HAL_TIM_Base_Start))
-<BR><BR>[Called By]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_quarter_us
+<BR><BR>[Called By]<UL><LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_quarter_us
 </UL>
 
 <P><STRONG><a name="[c3]"></a>HAL_TIM_Base_Stop</STRONG> (Thumb, 56 bytes, Stack size 0 bytes, stm32f4xx_hal_tim.o(i.HAL_TIM_Base_Stop))
-<BR><BR>[Called By]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_quarter_us
+<BR><BR>[Called By]<UL><LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_quarter_us
 </UL>
 
 <P><STRONG><a name="[86]"></a>HAL_TIM_IC_CaptureCallback</STRONG> (Thumb, 94 bytes, Stack size 8 bytes, ppm_signal.o(i.HAL_TIM_IC_CaptureCallback))
@@ -891,7 +891,7 @@ Global Symbols
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f405xx.o(RESET)
 </UL>
 <P><STRONG><a name="[a4]"></a>PCA9685_AutoIncrement</STRONG> (Thumb, 16 bytes, Stack size 8 bytes, pca9685.o(i.PCA9685_AutoIncrement))
-<BR><BR>[Stack]<UL><LI>Max Depth = 160<LI>Call Chain = PCA9685_AutoIncrement &rArr; PCA9685_SetBit &rArr; i2cdevWriteBit &rArr; i2cdevReadByte &rArr; SOFT_I2C_Read_Byte &rArr; SOFT_I2C_NAck &rArr; SOFT_I2C_SDA_OUT &rArr; GPIO_Set
+<BR><BR>[Stack]<UL><LI>Max Depth = 152<LI>Call Chain = PCA9685_AutoIncrement &rArr; PCA9685_SetBit &rArr; i2cdevWriteBit &rArr; i2cdevReadByte &rArr; SOFT_I2C_Read_Byte &rArr; SOFT_I2C_SDA_OUT &rArr; GPIO_Set
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCA9685_SetBit
 </UL>
@@ -899,7 +899,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[a6]"></a>PCA9685_Init</STRONG> (Thumb, 62 bytes, Stack size 8 bytes, pca9685.o(i.PCA9685_Init))
-<BR><BR>[Stack]<UL><LI>Max Depth = 216<LI>Call Chain = PCA9685_Init &rArr; PCA9685_SetPwmFrequency &rArr; PCA9685_SleepMode &rArr; PCA9685_SetBit &rArr; i2cdevWriteBit &rArr; i2cdevReadByte &rArr; SOFT_I2C_Read_Byte &rArr; SOFT_I2C_NAck &rArr; SOFT_I2C_SDA_OUT &rArr; GPIO_Set
+<BR><BR>[Stack]<UL><LI>Max Depth = 208<LI>Call Chain = PCA9685_Init &rArr; PCA9685_SetPwmFrequency &rArr; PCA9685_SleepMode &rArr; PCA9685_SetBit &rArr; i2cdevWriteBit &rArr; i2cdevReadByte &rArr; SOFT_I2C_Read_Byte &rArr; SOFT_I2C_SDA_OUT &rArr; GPIO_Set
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCA9685_SoftwareReset
 <LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCA9685_SetServoAngle
@@ -910,7 +910,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[aa]"></a>PCA9685_RestartMode</STRONG> (Thumb, 16 bytes, Stack size 8 bytes, pca9685.o(i.PCA9685_RestartMode))
-<BR><BR>[Stack]<UL><LI>Max Depth = 160<LI>Call Chain = PCA9685_RestartMode &rArr; PCA9685_SetBit &rArr; i2cdevWriteBit &rArr; i2cdevReadByte &rArr; SOFT_I2C_Read_Byte &rArr; SOFT_I2C_NAck &rArr; SOFT_I2C_SDA_OUT &rArr; GPIO_Set
+<BR><BR>[Stack]<UL><LI>Max Depth = 152<LI>Call Chain = PCA9685_RestartMode &rArr; PCA9685_SetBit &rArr; i2cdevWriteBit &rArr; i2cdevReadByte &rArr; SOFT_I2C_Read_Byte &rArr; SOFT_I2C_SDA_OUT &rArr; GPIO_Set
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCA9685_SetBit
 </UL>
@@ -918,7 +918,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[a5]"></a>PCA9685_SetBit</STRONG> (Thumb, 26 bytes, Stack size 24 bytes, pca9685.o(i.PCA9685_SetBit))
-<BR><BR>[Stack]<UL><LI>Max Depth = 152<LI>Call Chain = PCA9685_SetBit &rArr; i2cdevWriteBit &rArr; i2cdevReadByte &rArr; SOFT_I2C_Read_Byte &rArr; SOFT_I2C_NAck &rArr; SOFT_I2C_SDA_OUT &rArr; GPIO_Set
+<BR><BR>[Stack]<UL><LI>Max Depth = 144<LI>Call Chain = PCA9685_SetBit &rArr; i2cdevWriteBit &rArr; i2cdevReadByte &rArr; SOFT_I2C_Read_Byte &rArr; SOFT_I2C_SDA_OUT &rArr; GPIO_Set
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2cdevWriteBit
 </UL>
@@ -928,7 +928,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[ac]"></a>PCA9685_SetPwm</STRONG> (Thumb, 68 bytes, Stack size 32 bytes, pca9685.o(i.PCA9685_SetPwm))
-<BR><BR>[Stack]<UL><LI>Max Depth = 128<LI>Call Chain = PCA9685_SetPwm &rArr; i2cdevWrite &rArr; SOFT_I2C_Wait_Ack &rArr; SOFT_I2C_Stop &rArr; SOFT_I2C_SDA_OUT &rArr; GPIO_Set
+<BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = PCA9685_SetPwm &rArr; i2cdevWrite &rArr; SOFT_I2C_Wait_Ack &rArr; SOFT_I2C_SDA_OUT &rArr; GPIO_Set
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2cdevWrite
 </UL>
@@ -936,7 +936,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[a9]"></a>PCA9685_SetPwmFrequency</STRONG> (Thumb, 200 bytes, Stack size 48 bytes, pca9685.o(i.PCA9685_SetPwmFrequency))
-<BR><BR>[Stack]<UL><LI>Max Depth = 208<LI>Call Chain = PCA9685_SetPwmFrequency &rArr; PCA9685_SleepMode &rArr; PCA9685_SetBit &rArr; i2cdevWriteBit &rArr; i2cdevReadByte &rArr; SOFT_I2C_Read_Byte &rArr; SOFT_I2C_NAck &rArr; SOFT_I2C_SDA_OUT &rArr; GPIO_Set
+<BR><BR>[Stack]<UL><LI>Max Depth = 200<LI>Call Chain = PCA9685_SetPwmFrequency &rArr; PCA9685_SleepMode &rArr; PCA9685_SetBit &rArr; i2cdevWriteBit &rArr; i2cdevReadByte &rArr; SOFT_I2C_Read_Byte &rArr; SOFT_I2C_SDA_OUT &rArr; GPIO_Set
 </UL>
 <BR>[Calls]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_floor
 <LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
@@ -954,7 +954,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[a7]"></a>PCA9685_SetServoAngle</STRONG> (Thumb, 98 bytes, Stack size 16 bytes, pca9685.o(i.PCA9685_SetServoAngle))
-<BR><BR>[Stack]<UL><LI>Max Depth = 144<LI>Call Chain = PCA9685_SetServoAngle &rArr; PCA9685_SetPwm &rArr; i2cdevWrite &rArr; SOFT_I2C_Wait_Ack &rArr; SOFT_I2C_Stop &rArr; SOFT_I2C_SDA_OUT &rArr; GPIO_Set
+<BR><BR>[Stack]<UL><LI>Max Depth = 136<LI>Call Chain = PCA9685_SetServoAngle &rArr; PCA9685_SetPwm &rArr; i2cdevWrite &rArr; SOFT_I2C_Wait_Ack &rArr; SOFT_I2C_SDA_OUT &rArr; GPIO_Set
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCA9685_SetPwm
 </UL>
@@ -962,7 +962,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[b0]"></a>PCA9685_SleepMode</STRONG> (Thumb, 16 bytes, Stack size 8 bytes, pca9685.o(i.PCA9685_SleepMode))
-<BR><BR>[Stack]<UL><LI>Max Depth = 160<LI>Call Chain = PCA9685_SleepMode &rArr; PCA9685_SetBit &rArr; i2cdevWriteBit &rArr; i2cdevReadByte &rArr; SOFT_I2C_Read_Byte &rArr; SOFT_I2C_NAck &rArr; SOFT_I2C_SDA_OUT &rArr; GPIO_Set
+<BR><BR>[Stack]<UL><LI>Max Depth = 152<LI>Call Chain = PCA9685_SleepMode &rArr; PCA9685_SetBit &rArr; i2cdevWriteBit &rArr; i2cdevReadByte &rArr; SOFT_I2C_Read_Byte &rArr; SOFT_I2C_SDA_OUT &rArr; GPIO_Set
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCA9685_SetBit
 </UL>
@@ -970,7 +970,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[a8]"></a>PCA9685_SoftwareReset</STRONG> (Thumb, 26 bytes, Stack size 8 bytes, pca9685.o(i.PCA9685_SoftwareReset))
-<BR><BR>[Stack]<UL><LI>Max Depth = 96<LI>Call Chain = PCA9685_SoftwareReset &rArr; i2cdevWriteByte &rArr; SOFT_I2C_Wait_Ack &rArr; SOFT_I2C_Stop &rArr; SOFT_I2C_SDA_OUT &rArr; GPIO_Set
+<BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = PCA9685_SoftwareReset &rArr; i2cdevWriteByte &rArr; SOFT_I2C_Wait_Ack &rArr; SOFT_I2C_SDA_OUT &rArr; GPIO_Set
 </UL>
 <BR>[Calls]<UL><LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2cdevWriteByte
 </UL>
@@ -978,7 +978,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[b2]"></a>PCA9685_Superfast_SetServoAngle</STRONG> (Thumb, 84 bytes, Stack size 24 bytes, pca9685.o(i.PCA9685_Superfast_SetServoAngle))
-<BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = PCA9685_Superfast_SetServoAngle &rArr; i2cdevWriteByte &rArr; SOFT_I2C_Wait_Ack &rArr; SOFT_I2C_Stop &rArr; SOFT_I2C_SDA_OUT &rArr; GPIO_Set
+<BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = PCA9685_Superfast_SetServoAngle &rArr; i2cdevWriteByte &rArr; SOFT_I2C_Wait_Ack &rArr; SOFT_I2C_SDA_OUT &rArr; GPIO_Set
 </UL>
 <BR>[Calls]<UL><LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2cdevWriteByte
 </UL>
@@ -988,97 +988,89 @@ Global Symbols
 <P><STRONG><a name="[9]"></a>PendSV_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f4xx_it.o(i.PendSV_Handler))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f405xx.o(RESET)
 </UL>
-<P><STRONG><a name="[b3]"></a>SOFT_I2C_Ack</STRONG> (Thumb, 48 bytes, Stack size 8 bytes, soft_i2c.o(i.SOFT_I2C_Ack))
-<BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = SOFT_I2C_Ack &rArr; SOFT_I2C_SDA_OUT &rArr; GPIO_Set
+<P><STRONG><a name="[b3]"></a>SOFT_I2C_Ack</STRONG> (Thumb, 42 bytes, Stack size 8 bytes, soft_i2c.o(i.SOFT_I2C_Ack))
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = SOFT_I2C_Ack &rArr; SOFT_I2C_Delay &rArr; delay_quarter_us
 </UL>
-<BR>[Calls]<UL><LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_SDA_OUT
-<LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_Delay
+<BR>[Calls]<UL><LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_Delay
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_Read_Byte
+<BR>[Called By]<UL><LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_Read_Byte
 </UL>
 
-<P><STRONG><a name="[b5]"></a>SOFT_I2C_Delay</STRONG> (Thumb, 10 bytes, Stack size 8 bytes, soft_i2c.o(i.SOFT_I2C_Delay))
+<P><STRONG><a name="[b4]"></a>SOFT_I2C_Delay</STRONG> (Thumb, 10 bytes, Stack size 8 bytes, soft_i2c.o(i.SOFT_I2C_Delay))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = SOFT_I2C_Delay &rArr; delay_quarter_us
 </UL>
-<BR>[Calls]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_quarter_us
+<BR>[Calls]<UL><LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_quarter_us
 </UL>
-<BR>[Called By]<UL><LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_Wait_Ack
-<LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_Stop
+<BR>[Called By]<UL><LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_Stop
 <LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_Start
 <LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_Send_Byte
-<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_Read_Byte
-<LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_NAck
+<LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_Read_Byte
+<LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_NAck
 <LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_Ack
 </UL>
 
-<P><STRONG><a name="[b7]"></a>SOFT_I2C_NAck</STRONG> (Thumb, 48 bytes, Stack size 8 bytes, soft_i2c.o(i.SOFT_I2C_NAck))
-<BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = SOFT_I2C_NAck &rArr; SOFT_I2C_SDA_OUT &rArr; GPIO_Set
+<P><STRONG><a name="[b6]"></a>SOFT_I2C_NAck</STRONG> (Thumb, 44 bytes, Stack size 8 bytes, soft_i2c.o(i.SOFT_I2C_NAck))
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = SOFT_I2C_NAck &rArr; SOFT_I2C_Delay &rArr; delay_quarter_us
 </UL>
-<BR>[Calls]<UL><LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_SDA_OUT
-<LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_Delay
+<BR>[Calls]<UL><LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_Delay
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_Read_Byte
+<BR>[Called By]<UL><LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_Read_Byte
 </UL>
 
-<P><STRONG><a name="[b8]"></a>SOFT_I2C_Read_Byte</STRONG> (Thumb, 86 bytes, Stack size 16 bytes, soft_i2c.o(i.SOFT_I2C_Read_Byte))
-<BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = SOFT_I2C_Read_Byte &rArr; SOFT_I2C_NAck &rArr; SOFT_I2C_SDA_OUT &rArr; GPIO_Set
+<P><STRONG><a name="[b7]"></a>SOFT_I2C_Read_Byte</STRONG> (Thumb, 90 bytes, Stack size 16 bytes, soft_i2c.o(i.SOFT_I2C_Read_Byte))
+<BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = SOFT_I2C_Read_Byte &rArr; SOFT_I2C_SDA_OUT &rArr; GPIO_Set
 </UL>
-<BR>[Calls]<UL><LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_SDA_IN
-<LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_NAck
-<LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_Delay
+<BR>[Calls]<UL><LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_SDA_OUT
+<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_SDA_IN
+<LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_NAck
+<LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_Delay
 <LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_Ack
 </UL>
 <BR>[Called By]<UL><LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2cdevReadByte
 </UL>
 
-<P><STRONG><a name="[b9]"></a>SOFT_I2C_SDA_IN</STRONG> (Thumb, 24 bytes, Stack size 16 bytes, soft_i2c.o(i.SOFT_I2C_SDA_IN))
+<P><STRONG><a name="[b8]"></a>SOFT_I2C_SDA_IN</STRONG> (Thumb, 24 bytes, Stack size 16 bytes, soft_i2c.o(i.SOFT_I2C_SDA_IN))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = SOFT_I2C_SDA_IN &rArr; GPIO_Set
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Set
 </UL>
 <BR>[Called By]<UL><LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_Wait_Ack
-<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_Read_Byte
+<LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_Read_Byte
 </UL>
 
-<P><STRONG><a name="[b4]"></a>SOFT_I2C_SDA_OUT</STRONG> (Thumb, 24 bytes, Stack size 16 bytes, soft_i2c.o(i.SOFT_I2C_SDA_OUT))
+<P><STRONG><a name="[b9]"></a>SOFT_I2C_SDA_OUT</STRONG> (Thumb, 24 bytes, Stack size 16 bytes, soft_i2c.o(i.SOFT_I2C_SDA_OUT))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = SOFT_I2C_SDA_OUT &rArr; GPIO_Set
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Set
 </UL>
-<BR>[Called By]<UL><LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_Stop
-<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_Start
-<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_Send_Byte
-<LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_NAck
-<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_Ack
+<BR>[Called By]<UL><LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_Wait_Ack
+<LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_Read_Byte
 </UL>
 
-<P><STRONG><a name="[bb]"></a>SOFT_I2C_Send_Byte</STRONG> (Thumb, 72 bytes, Stack size 16 bytes, soft_i2c.o(i.SOFT_I2C_Send_Byte))
-<BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = SOFT_I2C_Send_Byte &rArr; SOFT_I2C_SDA_OUT &rArr; GPIO_Set
+<P><STRONG><a name="[bb]"></a>SOFT_I2C_Send_Byte</STRONG> (Thumb, 62 bytes, Stack size 16 bytes, soft_i2c.o(i.SOFT_I2C_Send_Byte))
+<BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = SOFT_I2C_Send_Byte &rArr; SOFT_I2C_Delay &rArr; delay_quarter_us
 </UL>
-<BR>[Calls]<UL><LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_SDA_OUT
-<LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_Delay
+<BR>[Calls]<UL><LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_Delay
 </UL>
 <BR>[Called By]<UL><LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2cdevWriteByte
 <LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2cdevWrite
 <LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2cdevReadByte
 </UL>
 
-<P><STRONG><a name="[bc]"></a>SOFT_I2C_Start</STRONG> (Thumb, 42 bytes, Stack size 8 bytes, soft_i2c.o(i.SOFT_I2C_Start))
-<BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = SOFT_I2C_Start &rArr; SOFT_I2C_SDA_OUT &rArr; GPIO_Set
+<P><STRONG><a name="[bc]"></a>SOFT_I2C_Start</STRONG> (Thumb, 38 bytes, Stack size 8 bytes, soft_i2c.o(i.SOFT_I2C_Start))
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = SOFT_I2C_Start &rArr; SOFT_I2C_Delay &rArr; delay_quarter_us
 </UL>
-<BR>[Calls]<UL><LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_SDA_OUT
-<LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_Delay
+<BR>[Calls]<UL><LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_Delay
 </UL>
 <BR>[Called By]<UL><LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2cdevWriteByte
 <LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2cdevWrite
 <LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2cdevReadByte
 </UL>
 
-<P><STRONG><a name="[bd]"></a>SOFT_I2C_Stop</STRONG> (Thumb, 36 bytes, Stack size 8 bytes, soft_i2c.o(i.SOFT_I2C_Stop))
-<BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = SOFT_I2C_Stop &rArr; SOFT_I2C_SDA_OUT &rArr; GPIO_Set
+<P><STRONG><a name="[bd]"></a>SOFT_I2C_Stop</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, soft_i2c.o(i.SOFT_I2C_Stop))
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = SOFT_I2C_Stop &rArr; SOFT_I2C_Delay &rArr; delay_quarter_us
 </UL>
-<BR>[Calls]<UL><LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_SDA_OUT
-<LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_Delay
+<BR>[Calls]<UL><LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_Delay
 </UL>
 <BR>[Called By]<UL><LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2cdevWriteByte
 <LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2cdevWrite
@@ -1086,12 +1078,12 @@ Global Symbols
 <LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_Wait_Ack
 </UL>
 
-<P><STRONG><a name="[be]"></a>SOFT_I2C_Wait_Ack</STRONG> (Thumb, 62 bytes, Stack size 8 bytes, soft_i2c.o(i.SOFT_I2C_Wait_Ack))
-<BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = SOFT_I2C_Wait_Ack &rArr; SOFT_I2C_Stop &rArr; SOFT_I2C_SDA_OUT &rArr; GPIO_Set
+<P><STRONG><a name="[be]"></a>SOFT_I2C_Wait_Ack</STRONG> (Thumb, 68 bytes, Stack size 8 bytes, soft_i2c.o(i.SOFT_I2C_Wait_Ack))
+<BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = SOFT_I2C_Wait_Ack &rArr; SOFT_I2C_SDA_OUT &rArr; GPIO_Set
 </UL>
 <BR>[Calls]<UL><LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_Stop
-<LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_SDA_IN
-<LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_Delay
+<LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_SDA_OUT
+<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_SDA_IN
 </UL>
 <BR>[Called By]<UL><LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2cdevWriteByte
 <LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2cdevWrite
@@ -1167,29 +1159,29 @@ Global Symbols
 
 <P><STRONG><a name="[d6]"></a>__scatterload_zeroinit</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_zeroinit), UNUSED)
 
-<P><STRONG><a name="[b6]"></a>delay_quarter_us</STRONG> (Thumb, 52 bytes, Stack size 16 bytes, tim.o(i.delay_quarter_us))
+<P><STRONG><a name="[b5]"></a>delay_quarter_us</STRONG> (Thumb, 52 bytes, Stack size 16 bytes, tim.o(i.delay_quarter_us))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = delay_quarter_us
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_Stop
 <LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_Start
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_Delay
+<BR>[Called By]<UL><LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_Delay
 </UL>
 
 <P><STRONG><a name="[c4]"></a>i2cdevReadByte</STRONG> (Thumb, 80 bytes, Stack size 24 bytes, soft_i2c.o(i.i2cdevReadByte))
-<BR><BR>[Stack]<UL><LI>Max Depth = 96<LI>Call Chain = i2cdevReadByte &rArr; SOFT_I2C_Read_Byte &rArr; SOFT_I2C_NAck &rArr; SOFT_I2C_SDA_OUT &rArr; GPIO_Set
+<BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = i2cdevReadByte &rArr; SOFT_I2C_Read_Byte &rArr; SOFT_I2C_SDA_OUT &rArr; GPIO_Set
 </UL>
 <BR>[Calls]<UL><LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_Wait_Ack
 <LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_Stop
 <LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_Start
 <LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_Send_Byte
-<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_Read_Byte
+<LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_Read_Byte
 </UL>
 <BR>[Called By]<UL><LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2cdevWriteBit
 </UL>
 
 <P><STRONG><a name="[ad]"></a>i2cdevWrite</STRONG> (Thumb, 100 bytes, Stack size 32 bytes, soft_i2c.o(i.i2cdevWrite))
-<BR><BR>[Stack]<UL><LI>Max Depth = 96<LI>Call Chain = i2cdevWrite &rArr; SOFT_I2C_Wait_Ack &rArr; SOFT_I2C_Stop &rArr; SOFT_I2C_SDA_OUT &rArr; GPIO_Set
+<BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = i2cdevWrite &rArr; SOFT_I2C_Wait_Ack &rArr; SOFT_I2C_SDA_OUT &rArr; GPIO_Set
 </UL>
 <BR>[Calls]<UL><LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_Wait_Ack
 <LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_Stop
@@ -1200,7 +1192,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[ab]"></a>i2cdevWriteBit</STRONG> (Thumb, 80 bytes, Stack size 32 bytes, soft_i2c.o(i.i2cdevWriteBit))
-<BR><BR>[Stack]<UL><LI>Max Depth = 128<LI>Call Chain = i2cdevWriteBit &rArr; i2cdevReadByte &rArr; SOFT_I2C_Read_Byte &rArr; SOFT_I2C_NAck &rArr; SOFT_I2C_SDA_OUT &rArr; GPIO_Set
+<BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = i2cdevWriteBit &rArr; i2cdevReadByte &rArr; SOFT_I2C_Read_Byte &rArr; SOFT_I2C_SDA_OUT &rArr; GPIO_Set
 </UL>
 <BR>[Calls]<UL><LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2cdevWriteByte
 <LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2cdevReadByte
@@ -1209,7 +1201,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[b1]"></a>i2cdevWriteByte</STRONG> (Thumb, 82 bytes, Stack size 24 bytes, soft_i2c.o(i.i2cdevWriteByte))
-<BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = i2cdevWriteByte &rArr; SOFT_I2C_Wait_Ack &rArr; SOFT_I2C_Stop &rArr; SOFT_I2C_SDA_OUT &rArr; GPIO_Set
+<BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = i2cdevWriteByte &rArr; SOFT_I2C_Wait_Ack &rArr; SOFT_I2C_SDA_OUT &rArr; GPIO_Set
 </UL>
 <BR>[Calls]<UL><LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_Wait_Ack
 <LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SOFT_I2C_Stop
@@ -1223,7 +1215,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[59]"></a>main</STRONG> (Thumb, 472 bytes, Stack size 0 bytes, main.o(i.main))
-<BR><BR>[Stack]<UL><LI>Max Depth = 216<LI>Call Chain = main &rArr; PCA9685_Init &rArr; PCA9685_SetPwmFrequency &rArr; PCA9685_SleepMode &rArr; PCA9685_SetBit &rArr; i2cdevWriteBit &rArr; i2cdevReadByte &rArr; SOFT_I2C_Read_Byte &rArr; SOFT_I2C_NAck &rArr; SOFT_I2C_SDA_OUT &rArr; GPIO_Set
+<BR><BR>[Stack]<UL><LI>Max Depth = 208<LI>Call Chain = main &rArr; PCA9685_Init &rArr; PCA9685_SetPwmFrequency &rArr; PCA9685_SleepMode &rArr; PCA9685_SetBit &rArr; i2cdevWriteBit &rArr; i2cdevReadByte &rArr; SOFT_I2C_Read_Byte &rArr; SOFT_I2C_SDA_OUT &rArr; GPIO_Set
 </UL>
 <BR>[Calls]<UL><LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCA9685_Superfast_SetServoAngle
 <LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCA9685_Init

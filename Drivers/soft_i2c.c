@@ -42,7 +42,7 @@ void SOFT_I2C_Delay(void)
 //产生IIC
 void SOFT_I2C_Start(void)
 {
-	SOFT_I2C_SDA_OUT(); // sda线输出
+	//SOFT_I2C_SDA_OUT(); // sda线输出
 	
 //	SOFT_I2C_SCL=0;
 //	SOFT_I2C_SDA=0;
@@ -60,7 +60,7 @@ void SOFT_I2C_Start(void)
 void SOFT_I2C_Stop(void)
 {
 //	SOFT_I2C_SCL=0;
-	SOFT_I2C_SDA_OUT(); // sda线输出
+	//SOFT_I2C_SDA_OUT(); // sda线输出
 //	SOFT_I2C_Delay();
 	
 	SOFT_I2C_SDA=0;
@@ -81,9 +81,9 @@ u8 SOFT_I2C_Wait_Ack(void)
 {
 	u8 ucErrTime = 0;
 	
-	SOFT_I2C_SCL=0;
+	SOFT_I2C_SDA=1;
 	SOFT_I2C_SDA_IN(); // SDA设置为输入
-	SOFT_I2C_Delay();
+	//SOFT_I2C_Delay();
 	SOFT_I2C_SCL=1;
 	//SOFT_I2C_Delay();
 	while (MPU_READ_SDA)
@@ -92,22 +92,26 @@ u8 SOFT_I2C_Wait_Ack(void)
 		if (ucErrTime > 250)
 		{
 			SOFT_I2C_Stop();
+			SOFT_I2C_SDA_OUT();
 			return 1;
 		}
 	}
 	SOFT_I2C_SCL=0; //时钟输出0
+	SOFT_I2C_SDA_OUT();
 	return 0;
 }
 //产生ACK应答
 void SOFT_I2C_Ack(void)
 {
 	SOFT_I2C_SCL=0;
-	SOFT_I2C_SDA_OUT();
+//	SOFT_I2C_SDA_OUT();
+	
 	SOFT_I2C_SDA=0;
 	SOFT_I2C_Delay();
 	
 	SOFT_I2C_SCL=1;
 	SOFT_I2C_Delay();
+	
 	SOFT_I2C_SCL=0;
 	SOFT_I2C_Delay();
 }
@@ -115,7 +119,7 @@ void SOFT_I2C_Ack(void)
 void SOFT_I2C_NAck(void)
 {
 	SOFT_I2C_SCL=0;
-	SOFT_I2C_SDA_OUT();
+//	SOFT_I2C_SDA_OUT();
 	
 	SOFT_I2C_SDA=1;
 	SOFT_I2C_Delay();
@@ -135,7 +139,7 @@ void SOFT_I2C_NAck(void)
 void SOFT_I2C_Send_Byte(u8 txd)
 {
 	u8 t;
-	SOFT_I2C_SDA_OUT();
+//	SOFT_I2C_SDA_OUT();
 	SOFT_I2C_SCL=0; //拉低时钟开始数据传输
 	SOFT_I2C_Delay();
 	
@@ -150,7 +154,7 @@ void SOFT_I2C_Send_Byte(u8 txd)
 		SOFT_I2C_Delay();
 		
 	}
-	SOFT_I2C_SCL=0;
+	//SOFT_I2C_SCL=0;
 }
 //读1个字节，ack=1时，发送ACK，ack=0，发送nACK
 u8 SOFT_I2C_Read_Byte(unsigned char ack)
@@ -174,6 +178,7 @@ u8 SOFT_I2C_Read_Byte(unsigned char ack)
 		SOFT_I2C_NAck(); //发送nACK
 	else
 		SOFT_I2C_Ack(); //发送ACK
+	SOFT_I2C_SDA_OUT();
 	return receive;
 }
 
