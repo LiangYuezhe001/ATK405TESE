@@ -5,22 +5,24 @@
 //SCL:PB6 pc7 \ SDA:PB7 pc6
 void SOFT_I2C_SDA_IN(void)
 	{
-		GPIO_InitTypeDef GPIO_InitStruct = {0};
-		GPIO_InitStruct.Pin = GPIO_PIN_7;
-		GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-		GPIO_InitStruct.Pull = GPIO_NOPULL;
-		GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
-		HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+//		GPIO_InitTypeDef GPIO_InitStruct = {0};
+//		GPIO_InitStruct.Pin = GPIO_PIN_7;
+//		GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+//		GPIO_InitStruct.Pull = GPIO_NOPULL;
+//		GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+//		HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+		GPIO_Set(GPIOB,GPIO_PIN_7,GPIO_MODE_INPUT,0,GPIO_SPEED_FREQ_HIGH,GPIO_NOPULL);
 	}
 
 	void SOFT_I2C_SDA_OUT(void)
 	{
-		GPIO_InitTypeDef GPIO_InitStruct = {0};
-		GPIO_InitStruct.Pin = GPIO_PIN_7;
-		GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-		GPIO_InitStruct.Pull = GPIO_NOPULL;
-		GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
-		HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+//		GPIO_InitTypeDef GPIO_InitStruct = {0};
+//		GPIO_InitStruct.Pin = GPIO_PIN_7;
+//		GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+//		GPIO_InitStruct.Pull = GPIO_NOPULL;
+//		GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+//		HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+		GPIO_Set(GPIOB,GPIO_PIN_7,GPIO_MODE_OUTPUT_PP,0,GPIO_SPEED_FREQ_HIGH,GPIO_NOPULL);
 	}
 	
 
@@ -35,16 +37,16 @@ void SOFT_I2C_SDA_IN(void)
 void SOFT_I2C_Delay(void)
 {
 	//HAL_Delay(1);
-	delay_us(1);
+	delay_quarter_us(1);
 }
 //产生IIC
 void SOFT_I2C_Start(void)
 {
 	SOFT_I2C_SDA_OUT(); // sda线输出
 	
-	SOFT_I2C_SCL=0;
-	SOFT_I2C_SDA=0;
-	SOFT_I2C_Delay();
+//	SOFT_I2C_SCL=0;
+//	SOFT_I2C_SDA=0;
+//	SOFT_I2C_Delay();
 	
 	SOFT_I2C_SDA=1;
 	SOFT_I2C_SCL=1;
@@ -57,19 +59,19 @@ void SOFT_I2C_Start(void)
 //产生IIC停止信号
 void SOFT_I2C_Stop(void)
 {
-	SOFT_I2C_SCL=0;
+//	SOFT_I2C_SCL=0;
 	SOFT_I2C_SDA_OUT(); // sda线输出
-	SOFT_I2C_Delay();
+//	SOFT_I2C_Delay();
 	
 	SOFT_I2C_SDA=0;
-	SOFT_I2C_SCL=0; // STOP:when CLK is high DATA change form low to high
-	SOFT_I2C_Delay();
+//	SOFT_I2C_SCL=0; // STOP:when CLK is high DATA change form low to high
+//	SOFT_I2C_Delay();
 	
 	SOFT_I2C_SCL=1;
 	SOFT_I2C_Delay();
 	SOFT_I2C_SDA=1; //发送I2C总线结束信号
 	SOFT_I2C_Delay();
-	SOFT_I2C_SCL=0;
+//	SOFT_I2C_SCL=0;
 	
 }
 //等待应答信号到来

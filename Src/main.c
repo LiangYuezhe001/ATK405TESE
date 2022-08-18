@@ -39,9 +39,9 @@
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
-#define MAX_ANGLE_A 115
-#define MIN_ANGLE_A 65
 /* USER CODE BEGIN PD */
+#define MIN_ANGLE_A 65
+#define MAX_ANGLE_A 115
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -106,10 +106,11 @@ int main(void)
 //	mpu6000Init();
 	PCA9685_Init();
 	//bmp280Init();
-		PCA9685_SetServoAngle(0, 90);
-		PCA9685_SetServoAngle(1, 90);
-		PCA9685_SetServoAngle(2, 90);
-		PCA9685_SetServoAngle(3, 90);
+	
+		PCA9685_Superfast_SetServoAngle(0, 90);
+		PCA9685_Superfast_SetServoAngle(1, 90);
+		PCA9685_Superfast_SetServoAngle(2, 90);
+		PCA9685_Superfast_SetServoAngle(3, 90);
  // iicsearch();
 
 	//hmc5883lInit();
@@ -141,7 +142,7 @@ int main(void)
 		if(angle[cnt]>=MAX_ANGLE_A)angle[cnt]=MAX_ANGLE_A;
 	}
 	for(int cnt=0;cnt<5;cnt++){
-		PCA9685_SetServoAngle(cnt, angle[cnt]);
+		PCA9685_Superfast_SetServoAngle(cnt, angle[cnt]);
 	}
 	
 		

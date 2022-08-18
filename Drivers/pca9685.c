@@ -96,6 +96,7 @@ PCA9685_STATUS PCA9685_SetPwm(uint8_t Channel, uint16_t OnTime, uint16_t OffTime
 	return PCA9685_OK;
 }
 
+
 PCA9685_STATUS PCA9685_SetPin(uint8_t Channel, uint16_t Value, uint8_t Invert)
 {
   if(Value > 4095) Value = 4095;
@@ -136,20 +137,39 @@ PCA9685_STATUS PCA9685_SetServoAngle(uint8_t Channel, float Angle)
 	float Value;
 //	if(Angle < MIN_ANGLE) Angle = MIN_ANGLE;
 //	if(Angle > MAX_ANGLE) Angle = MAX_ANGLE;
-
-	Value = (Angle - MIN_ANGLE) * ((float)SERVO_MAX - (float)SERVO_MIN) / (MAX_ANGLE - MIN_ANGLE) + (float)SERVO_MIN;
-
-	return PCA9685_SetPin(Channel, (uint16_t)Value, 0);
+  Value = (Angle*2.2778f)+372.0f;
+	//Value = (Angle - MIN_ANGLE) * ((float)SERVO_MAX - (float)SERVO_MIN) / (MAX_ANGLE - MIN_ANGLE) + (float)SERVO_MIN;
+	if(Value > 4095) Value = 4095;
+	if(Value < 1) Value = 1;
+	//return PCA9685_SetPin(Channel, (uint16_t)Value, 0);
+	return PCA9685_SetPwm(Channel, 270, Value);
 }
 #endif
 
+PCA9685_STATUS PCA9685_Superfast_SetServoAngle(uint8_t Channel, float Angle)
+{
+	float Value;
+	uint8_t RegisterAddress;
+	uint8_t Message;
+	
+  Value = (Angle*2.2778f)+372.0f;	
+	if(Value > 4095) Value = 4095;
+	RegisterAddress = PCA9685_LED0_ON_L + (4 * Channel)+2;
+	Message = (uint16_t)Value & 0xFF;
+	return i2cdevWriteByte(0, PCA9685_ADDRESS, RegisterAddress, Message);
+	
+}
+
 PCA9685_STATUS PCA9685_Init()
 {
+	PCA9685_SetServoAngle(0, 90.0f);
+	PCA9685_SetServoAngle(1, 90.0f);
+	PCA9685_SetServoAngle(2, 90.0f);
+	PCA9685_SetServoAngle(3, 90.0f);
 	
-
 	PCA9685_SoftwareReset();
 
-	PCA9685_SetPwmFrequency(48);
+	PCA9685_SetPwmFrequency(50);
 
 	PCA9685_AutoIncrement(1);
 

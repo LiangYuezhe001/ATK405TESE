@@ -43,6 +43,7 @@ void MX_TIM9_Init(void);
 /* USER CODE BEGIN Prototypes */
 void delay_us(u16 us);
 void delay_ms(u16 ms);
+void delay_quarter_us(u16 us);
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus

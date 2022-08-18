@@ -22,7 +22,7 @@
 
 /* USER CODE BEGIN 0 */
 #include "main.h"
-void delay_us(u16 us)
+void delay_quarter_us(u16 us)
 {   u16 differ = 0xffff-us-5;
     HAL_TIM_Base_Start(&htim7);
     __HAL_TIM_SET_COUNTER(&htim7,differ);
@@ -33,7 +33,10 @@ void delay_us(u16 us)
     HAL_TIM_Base_Stop(&htim7);
 }
 
-
+void delay_us(u16 us)
+{
+	delay_quarter_us(4*us);
+}
 
 void delay_ms(u16 ms)
 {
@@ -50,7 +53,7 @@ void MX_TIM7_Init(void)
   TIM_MasterConfigTypeDef sMasterConfig = {0};
 
   htim7.Instance = TIM7;
-  htim7.Init.Prescaler = 167;
+  htim7.Init.Prescaler = 41;
   htim7.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim7.Init.Period = 1;
   htim7.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;

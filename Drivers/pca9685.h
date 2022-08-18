@@ -12,8 +12,8 @@
 //
 //	Servo min and max values for TURINGY TG9e Servos
 //
-#define SERVO_MIN	110
-#define SERVO_MAX	500
+#define SERVO_MIN	102
+#define SERVO_MAX	512
 #define MIN_ANGLE	0.0
 #define MAX_ANGLE	180.0
 #endif
@@ -75,6 +75,7 @@ PCA9685_STATUS PCA9685_SetPwm(uint8_t Channel, uint16_t OnTime, uint16_t OffTime
 PCA9685_STATUS PCA9685_SetPin(uint8_t Channel, uint16_t Value, uint8_t Invert);
 #ifdef PCA9685_SERVO_MODE
 PCA9685_STATUS PCA9685_SetServoAngle(uint8_t Channel, float Angle);
+PCA9685_STATUS PCA9685_Superfast_SetServoAngle(uint8_t Channel, float Angle);
 #endif
 
 PCA9685_STATUS PCA9685_Init();
