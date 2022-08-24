@@ -33,6 +33,7 @@
 #include "soft_i2c.h"
 #include "bmp280.h"
 #include "pca9685.h"
+#include <stdio.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -64,6 +65,13 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+
+int fputc(int ch, FILE *fp)
+{
+  HAL_UART_Transmit(&huart4, (uint8_t *)&ch, 1, 0xffff);
+  return ch;
+}
+
 u8 i=0;
 float Altitude;
 u8 DATA=0;
@@ -141,6 +149,7 @@ int main(void)
 			if(i>=100)
 			{i=0;
 				show=total_cnt;
+				printf("%d\n",show);
 				total_cnt=0;
 				
 			}
