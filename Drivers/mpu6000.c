@@ -66,8 +66,8 @@ bool mpu6000SpiWriteRegister(uint8_t reg, uint8_t data)
 	 HAL_Delay(1);
 	
 	
-	HAL_SPI_Transmit(&hspi1, &reg, 1, 1000);
-	HAL_SPI_Transmit(&hspi1, &data, 1, 1000);
+	HAL_SPI_Transmit_DMA(&hspi1, &reg, 1);
+	HAL_SPI_Transmit_DMA(&hspi1, &data, 1);
     DISABLE_MPU6000();
 	
 	HAL_Delay(1);
@@ -82,9 +82,9 @@ bool mpu6000SpiReadRegister(uint8_t reg, uint8_t length, uint8_t *pdata)
 	reg = reg | 0x80;
 	u8 null = 0xff;
 	
-	HAL_SPI_Transmit(&hspi1, &reg, 1, 1000);
+	HAL_SPI_Transmit_DMA(&hspi1, &reg, 1);
 	
-	HAL_SPI_TransmitReceive(&hspi1, &null, pdata, length, 1000);
+	HAL_SPI_TransmitReceive_DMA(&hspi1, &null, pdata, length);
 	
 	DISABLE_MPU6000();
 	

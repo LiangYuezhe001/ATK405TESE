@@ -38,6 +38,7 @@
 405\main.o: ../Inc/gpio.h
 405\main.o: ..\Drivers\soft_i2c.h
 405\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+405\main.o: ../Inc/dma.h
 405\main.o: ../Inc/spi.h
 405\main.o: ../Inc/usart.h
 405\main.o: ..\Drivers\hmc5883l.h

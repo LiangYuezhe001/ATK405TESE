@@ -105,7 +105,7 @@ int main(void)
   MX_UART4_Init();
   MX_TIM9_Init();
   /* USER CODE BEGIN 2 */
-//	mpu6000Init();
+	mpu6000Init();
 	PCA9685_Init();
 	//bmp280Init();
 	

@@ -2,6 +2,7 @@
 "405\startup_stm32f405xx.o"
 "405\main.o"
 "405\gpio.o"
+"405\dma.o"
 "405\spi.o"
 "405\tim.o"
 "405\usart.o"
