@@ -20,6 +20,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "dma.h"
+#include "i2c.h"
 #include "spi.h"
 #include "tim.h"
 #include "usart.h"
@@ -41,8 +42,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define MIN_ANGLE_A 65
-#define MAX_ANGLE_A 115
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -67,8 +67,9 @@ void SystemClock_Config(void);
 u8 i=0;
 float Altitude;
 u8 DATA=0;
+u16 cnt=0,total_cnt,show;
 extern u16 rc_sginal[11];
-float rc_channel[10],angle[5]={90};
+axis raw_data,old_data;
 /* USER CODE END 0 */
 
 /**
@@ -104,51 +105,48 @@ int main(void)
   MX_TIM7_Init();
   MX_UART4_Init();
   MX_TIM9_Init();
+  MX_I2C1_Init();
+  MX_TIM6_Init();
   /* USER CODE BEGIN 2 */
 	mpu6000Init();
 	PCA9685_Init();
 	//bmp280Init();
 	
-		PCA9685_Superfast_SetServoAngle(0, 90);
-		PCA9685_Superfast_SetServoAngle(1, 90);
-		PCA9685_Superfast_SetServoAngle(2, 90);
-		PCA9685_Superfast_SetServoAngle(3, 90);
+//		PCA9685_Superfast_SetServoAngle(0, 90);
+//		PCA9685_Superfast_SetServoAngle(1, 90);
+//		PCA9685_Superfast_SetServoAngle(2, 90);
+//		PCA9685_Superfast_SetServoAngle(3, 90);
  // iicsearch();
 
 	//hmc5883lInit();
-
+		HAL_TIM_Base_Start(&htim6);
+		__HAL_TIM_SET_COUNTER(&htim6,0);
 		HAL_TIM_IC_Start_IT(&htim9,TIM_CHANNEL_2);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
-  { for(int cnt=0;cnt<5;cnt++)
-		{
-		rc_channel[cnt]=((float)rc_sginal[cnt+1]-1000.0f)/1000.0f;
-	}
-		for(int cnt=0;cnt<5;cnt++)
-		{
-		angle[cnt]=65+rc_channel[3]*50;
-			if(cnt==0)angle[cnt]=angle[cnt]+rc_channel[1]*50-25;
-			if(cnt==2)angle[cnt]=angle[cnt]-rc_channel[1]*50+25;
-			if(cnt==1)angle[cnt]=angle[cnt]+rc_channel[0]*50-25;
-			if(cnt==3)angle[cnt]=angle[cnt]-rc_channel[0]*50+25;
-			
-			
-	}
-	
-		for(int cnt=0;cnt<5;cnt++)
-	{
-		if(angle[cnt]<=MIN_ANGLE_A)angle[cnt]=MIN_ANGLE_A;
-		if(angle[cnt]>=MAX_ANGLE_A)angle[cnt]=MAX_ANGLE_A;
-	}
-	for(int cnt=0;cnt<5;cnt++){
-		PCA9685_Superfast_SetServoAngle(cnt, angle[cnt]);
-	}
-	
-		
-		//Altitude=bmp280getAltitude();
+  { 
+
+		mpu6000AccRead(&raw_data);
+		if(raw_data.x!=old_data.x)
+		{	
+			cnt=__HAL_TIM_GET_COUNTER(&htim6);
+		HAL_TIM_Base_Stop(&htim6);
+			HAL_TIM_Base_Start(&htim6);
+		__HAL_TIM_SET_COUNTER(&htim6,0);
+			total_cnt+=cnt;
+			i++;
+			if(i>=100)
+			{i=0;
+				show=total_cnt;
+				total_cnt=0;
+				
+			}
+		}
+
+		old_data=raw_data;
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

@@ -149,6 +149,13 @@ typedef union
 	int16_t axis[3];
 } Axis3i16;
 
+typedef struct
+	{
+		int16_t x;
+		int16_t y;
+		int16_t z;
+	}axis;
+	
 enum mpu6000_dlpf_bw {
 	MPU6000_DLPF_BW_256 = 0,
 	MPU6000_DLPF_BW_188,
@@ -177,8 +184,8 @@ enum accel_fsr_e {
 
 
 _Bool mpu6000Init(void);
-_Bool mpu6000GyroRead(Axis3i16* gyroRaw);
-_Bool mpu6000AccRead(Axis3i16* accRaw);
+_Bool mpu6000GyroRead(axis* gyroRaw);
+_Bool mpu6000AccRead(axis* accRaw);
 
 
 #endif

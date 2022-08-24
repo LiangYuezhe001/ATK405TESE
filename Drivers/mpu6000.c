@@ -66,8 +66,8 @@ bool mpu6000SpiWriteRegister(uint8_t reg, uint8_t data)
 	 HAL_Delay(1);
 	
 	
-	HAL_SPI_Transmit_DMA(&hspi1, &reg, 1);
-	HAL_SPI_Transmit_DMA(&hspi1, &data, 1);
+	HAL_SPI_Transmit(&hspi1, &reg, 1,10);
+	HAL_SPI_Transmit(&hspi1, &data, 1,10);
     DISABLE_MPU6000();
 	
 	HAL_Delay(1);
@@ -78,13 +78,12 @@ bool mpu6000SpiReadRegister(uint8_t reg, uint8_t length, uint8_t *pdata)
 {
 	ENABLE_MPU6000();
 	//reg=0xf5;
-	
 	reg = reg | 0x80;
 	u8 null = 0xff;
 	
-	HAL_SPI_Transmit_DMA(&hspi1, &reg, 1);
+	HAL_SPI_Transmit(&hspi1, &reg, 1,10);
 	
-	HAL_SPI_TransmitReceive_DMA(&hspi1, &null, pdata, length);
+	HAL_SPI_TransmitReceive(&hspi1, &null, pdata, length,10);
 	
 	DISABLE_MPU6000();
 	
@@ -102,47 +101,46 @@ bool mpu6000Init(void)
 	
 	//复位MPU6000
 	mpu6000SpiWriteRegister(MPU_RA_PWR_MGMT_1, BIT_H_RESET);
-	HAL_Delay(50);
+	HAL_Delay(5);
 	mpu6000SpiWriteRegister(MPU_RA_SIGNAL_PATH_RESET, BIT_GYRO | BIT_ACC | BIT_TEMP);
-	HAL_Delay(50);
+	HAL_Delay(5);
 	mpu6000SpiWriteRegister(MPU_RA_PWR_MGMT_1, BIT_H_RESET);//复位两次增加传感器稳定性
-	HAL_Delay(50);
+	HAL_Delay(5);
 	mpu6000SpiWriteRegister(MPU_RA_SIGNAL_PATH_RESET, BIT_GYRO | BIT_ACC | BIT_TEMP);
-	HAL_Delay(50);
+	HAL_Delay(5);
 	
 	//读取ID
 	u8 id = 0x00;
 	mpu6000SpiReadRegister(MPU_RA_WHO_AM_I, 1, &id);
-	
 	//读取正常，初始化
 	if(id == MPU6000_WHO_AM_I_CONST)
 	{
 		//设置X轴陀螺作为时钟 
 		mpu6000SpiWriteRegister(MPU_RA_PWR_MGMT_1, MPU_CLK_SEL_PLLGYROX);
-		HAL_Delay(15);
+		HAL_Delay(3);
 		
 		//禁止I2C接口
 		mpu6000SpiWriteRegister(MPU_RA_USER_CTRL, BIT_I2C_IF_DIS);
-		HAL_Delay(15);
+		HAL_Delay(3);
 		mpu6000SpiWriteRegister(MPU_RA_PWR_MGMT_2, 0x00);
-		HAL_Delay(15);
+		HAL_Delay(3);
 		
 		// Accel Sample Rate 1kHz
 		// Gyroscope Output Rate =  1kHz when the DLPF is enabled
 		mpu6000SpiWriteRegister(MPU_RA_SMPLRT_DIV, 0);//设置采样率
-		HAL_Delay(15);
+		HAL_Delay(3);
 		
-		//设置陀螺仪 +/- 2000 DPS量程
-		mpu6000SpiWriteRegister(MPU_RA_GYRO_CONFIG, FSR_2000DPS << 3);
-		HAL_Delay(15);
+		//设置陀螺仪 +/- 250 DPS量程
+		mpu6000SpiWriteRegister(MPU_RA_GYRO_CONFIG, FSR_250DPS << 3);
+		HAL_Delay(3);
 		
-		//设置加速度 +/- 8 G 量程
-		mpu6000SpiWriteRegister(MPU_RA_ACCEL_CONFIG, FSR_8G << 3);
-		HAL_Delay(15);
+		//设置加速度 +/- 2 G 量程
+		mpu6000SpiWriteRegister(MPU_RA_ACCEL_CONFIG, FSR_2G << 3);
+		HAL_Delay(3);
 		
 		//设置中断引脚功能
 		mpu6000SpiWriteRegister(MPU_RA_INT_PIN_CFG, 0 << 7 | 0 << 6 | 0 << 5 | 1 << 4 | 0 << 3 | 0 << 2 | 0 << 1 | 0 << 0);//中断引脚配置
-		HAL_Delay(15);
+		HAL_Delay(3);
 		
 		//设置低通滤波带宽
 		mpu6000SpiWriteRegister(MPU_RA_CONFIG, BITS_DLPF_CFG_98HZ);
@@ -161,7 +159,7 @@ bool mpu6000Init(void)
 	return isInit;
 }
 
-bool mpu6000GyroRead(Axis3i16* gyroRaw)
+bool mpu6000GyroRead(axis* gyroRaw)
 {
 	if(!isInit) 
 		return false;
@@ -173,7 +171,7 @@ bool mpu6000GyroRead(Axis3i16* gyroRaw)
 	return true;
 }
 
-bool mpu6000AccRead(Axis3i16* accRaw)
+bool mpu6000AccRead(axis* accRaw)
 {
 	if(!isInit) 
 		return false;

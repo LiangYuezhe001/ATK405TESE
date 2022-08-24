@@ -26,6 +26,8 @@
 405\ppm_signal.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h
 405\ppm_signal.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h
 405\ppm_signal.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h
+405\ppm_signal.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h
+405\ppm_signal.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h
 405\ppm_signal.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h
 405\ppm_signal.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
 405\ppm_signal.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h
@@ -38,3 +40,4 @@
 405\ppm_signal.o: ../Inc/gpio.h
 405\ppm_signal.o: ..\Drivers\soft_i2c.h
 405\ppm_signal.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+405\ppm_signal.o: ..\Drivers\pca9685.h
