@@ -50,3 +50,5 @@
 405\main.o: ..\Drivers\soft_i2c.h
 405\main.o: ..\Drivers\pca9685.h
 405\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+405\main.o: ..\Drivers\ANO_DT.h
+405\main.o: ..\Drivers\kalman.h

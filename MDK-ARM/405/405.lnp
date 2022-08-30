@@ -35,6 +35,8 @@
 "405\bmp280.o"
 "405\ppm_signal.o"
 "405\pca9685.o"
+"405\kalman.o"
+"405\ano_dt.o"
 --library_type=microlib --strict --scatter "405\405.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

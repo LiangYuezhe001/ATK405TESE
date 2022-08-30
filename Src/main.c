@@ -34,6 +34,8 @@
 #include "bmp280.h"
 #include "pca9685.h"
 #include <stdio.h>
+#include "ANO_DT.h"
+#include "kalman.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -73,11 +75,11 @@ int fputc(int ch, FILE *fp)
 }
 
 u8 i=0;
-float Altitude;
+float Altitude,pitch,roll;
 u8 DATA=0;
 u16 cnt=0,total_cnt,show;
 extern u16 rc_sginal[11];
-axis raw_data,old_data;
+axis acc_data,gyro_data;
 /* USER CODE END 0 */
 
 /**
@@ -136,26 +138,11 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   { 
-
-		mpu6000AccRead(&raw_data);
-		if(raw_data.x!=old_data.x)
-		{	
-			cnt=__HAL_TIM_GET_COUNTER(&htim6);
-		HAL_TIM_Base_Stop(&htim6);
-			HAL_TIM_Base_Start(&htim6);
-		__HAL_TIM_SET_COUNTER(&htim6,0);
-			total_cnt+=cnt;
-			i++;
-			if(i>=100)
-			{i=0;
-				show=total_cnt;
-				printf("%d\n",show);
-				total_cnt=0;
-				
-			}
-		}
-
-		old_data=raw_data;
+		HAL_Delay(1);
+		mpu6000AccRead(&acc_data);
+		mpu6000GyroRead(&gyro_data);
+		KalmanCalculation(&gyro_data ,&acc_data,&pitch,&roll);
+		ANO_DT_Send_Status(pitch,roll,10,0,0,0);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

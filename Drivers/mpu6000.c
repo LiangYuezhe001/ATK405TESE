@@ -131,11 +131,11 @@ bool mpu6000Init(void)
 		HAL_Delay(3);
 		
 		//设置陀螺仪 +/- 250 DPS量程
-		mpu6000SpiWriteRegister(MPU_RA_GYRO_CONFIG, FSR_250DPS << 3);
+		mpu6000SpiWriteRegister(MPU_RA_GYRO_CONFIG, 0 << 3);
 		HAL_Delay(3);
 		
 		//设置加速度 +/- 2 G 量程
-		mpu6000SpiWriteRegister(MPU_RA_ACCEL_CONFIG, FSR_2G << 3);
+		mpu6000SpiWriteRegister(MPU_RA_ACCEL_CONFIG, 0 << 3);
 		HAL_Delay(3);
 		
 		//设置中断引脚功能
@@ -164,10 +164,15 @@ bool mpu6000GyroRead(axis* gyroRaw)
 	if(!isInit) 
 		return false;
 	u8 buffer[6];
+	short raw_gyro[3];
 	mpu6000SpiReadRegister(MPU_RA_GYRO_XOUT_H, 6, buffer);
-	gyroRaw->x = (((int16_t) buffer[0]) << 8) | buffer[1];
-	gyroRaw->y = (((int16_t) buffer[2]) << 8) | buffer[3];
-	gyroRaw->z = (((int16_t) buffer[4]) << 8) | buffer[5];
+	raw_gyro[0] = (((int16_t) buffer[0]) << 8) | buffer[1];
+	raw_gyro[1] = (((int16_t) buffer[2]) << 8) | buffer[3];
+	raw_gyro[2] = (((int16_t) buffer[4]) << 8) | buffer[5];
+	
+	gyroRaw->x=(float)raw_gyro[0]/32767*250;
+	gyroRaw->y=(float)raw_gyro[1]/32767*250;
+	gyroRaw->z=(float)raw_gyro[2]/32767*250;
 	return true;
 }
 
@@ -176,10 +181,15 @@ bool mpu6000AccRead(axis* accRaw)
 	if(!isInit) 
 		return false;
 	u8 buffer[6];
+	short raw_acc[3];
 	mpu6000SpiReadRegister(MPU_RA_ACCEL_XOUT_H, 6, buffer);
-	accRaw->x = (((int16_t) buffer[0]) << 8) | buffer[1];
-	accRaw->y = (((int16_t) buffer[2]) << 8) | buffer[3];
-	accRaw->z = (((int16_t) buffer[4]) << 8) | buffer[5];
+	raw_acc[0] = (((int16_t) buffer[0]) << 8) | buffer[1];
+	raw_acc[1] = (((int16_t) buffer[2]) << 8) | buffer[3];
+	raw_acc[2] = (((int16_t) buffer[4]) << 8) | buffer[5];
+	
+	accRaw->x=(float)raw_acc[0]/32767*2;
+	accRaw->y=(float)raw_acc[1]/32767*2;
+	accRaw->z=(float)raw_acc[2]/32767*2;
 	return true;
 }
 
