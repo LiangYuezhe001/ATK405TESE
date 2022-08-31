@@ -24,6 +24,7 @@
 #include "spi.h"
 #include "tim.h"
 #include "usart.h"
+#include "usb_device.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -117,6 +118,7 @@ int main(void)
   MX_TIM9_Init();
   MX_I2C1_Init();
   MX_TIM6_Init();
+  MX_USB_DEVICE_Init();
   /* USER CODE BEGIN 2 */
 	mpu6000Init();
 	PCA9685_Init();
@@ -138,11 +140,11 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   { 
-		HAL_Delay(1);
+		//HAL_Delay(1);
 		mpu6000AccRead(&acc_data);
 		mpu6000GyroRead(&gyro_data);
 		KalmanCalculation(&gyro_data ,&acc_data,&pitch,&roll);
-		ANO_DT_Send_Status(pitch,roll,10,0,0,0);
+		ANO_DT_Send_Status(pitch,-roll,10,0,0,0);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -173,7 +175,7 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLM = 4;
   RCC_OscInitStruct.PLL.PLLN = 168;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
-  RCC_OscInitStruct.PLL.PLLQ = 3;
+  RCC_OscInitStruct.PLL.PLLQ = 7;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
     Error_Handler();

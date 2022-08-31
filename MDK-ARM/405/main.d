@@ -34,6 +34,9 @@
 405\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 405\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 405\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
+405\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h
+405\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h
+405\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h
 405\main.o: ..\Drivers\mpu6000.h
 405\main.o: ../Inc/tim.h
 405\main.o: ../Inc/main.h
@@ -44,11 +47,16 @@
 405\main.o: ../Inc/i2c.h
 405\main.o: ../Inc/spi.h
 405\main.o: ../Inc/usart.h
+405\main.o: ../Inc/usb_device.h
+405\main.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h
+405\main.o: ../Inc/usbd_conf.h
+405\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+405\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+405\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 405\main.o: ..\Drivers\hmc5883l.h
 405\main.o: ..\Drivers\soft_i2c.h
 405\main.o: ..\Drivers\bmp280.h
 405\main.o: ..\Drivers\soft_i2c.h
 405\main.o: ..\Drivers\pca9685.h
-405\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 405\main.o: ..\Drivers\ANO_DT.h
 405\main.o: ..\Drivers\kalman.h
