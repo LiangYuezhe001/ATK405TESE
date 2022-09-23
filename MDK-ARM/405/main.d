@@ -60,3 +60,4 @@
 405\main.o: ..\Drivers\pca9685.h
 405\main.o: ..\Drivers\ANO_DT.h
 405\main.o: ..\Drivers\kalman.h
+405\main.o: ..\Drivers\maths.h

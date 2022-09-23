@@ -44,6 +44,7 @@
 "405\pca9685.o"
 "405\kalman.o"
 "405\ano_dt.o"
+"405\maths.o"
 "405\usbd_core.o"
 "405\usbd_ctlreq.o"
 "405\usbd_ioreq.o"

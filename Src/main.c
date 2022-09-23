@@ -37,6 +37,7 @@
 #include <stdio.h>
 #include "ANO_DT.h"
 #include "kalman.h"
+#include "maths.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -75,12 +76,23 @@ int fputc(int ch, FILE *fp)
   return ch;
 }
 
+void Send_Status(double a, double b, double c)
+{
+	printf("250\r\n");
+	printf("%lf\r\n",a);
+	printf("%lf\r\n",b);
+	printf("%lf\r\n",c);
+}
+
 u8 i=0;
 float Altitude,pitch,roll;
 u8 DATA=0;
 u16 cnt=0,total_cnt,show;
 extern u16 rc_sginal[11];
 axis acc_data,gyro_data;
+t_fp_vector_def acc_vector,facc_vector;
+
+
 /* USER CODE END 0 */
 
 /**
@@ -122,6 +134,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
 	mpu6000Init();
 	PCA9685_Init();
+	
 	//bmp280Init();
 	
 //		PCA9685_Superfast_SetServoAngle(0, 90);
@@ -143,8 +156,21 @@ int main(void)
 		//HAL_Delay(1);
 		mpu6000AccRead(&acc_data);
 		mpu6000GyroRead(&gyro_data);
-		KalmanCalculation(&gyro_data ,&acc_data,&pitch,&roll);
-		ANO_DT_Send_Status(pitch,-roll,10,0,0,0);
+		complementary_filter(&gyro_data ,&acc_data,&pitch,&roll);
+		acc_vector=rotate(&acc_data, pitch,roll);
+		facc_vector.X=0.8f*facc_vector.X+0.2f*acc_vector.X;
+		facc_vector.Y=0.8f*facc_vector.Y+0.2f*acc_vector.Y;
+		facc_vector.Z=0.8f*facc_vector.Z+0.2f*acc_vector.Z;
+		//KalmanCalculation(&gyro_data ,&acc_data,&pitch,&roll);
+	//	ANO_DT_Send_Status(facc_vector.X,facc_vector.Y,facc_vector.Z,0,0,0);
+		if(i>50)
+		{
+	//	Send_Status((double)facc_vector.X,(double)facc_vector.Y,(double)facc_vector.Z);
+		ANO_DT_Send_Status(facc_vector.X,facc_vector.Y,facc_vector.Z,0,0,0);
+		i=0;}
+		i++;
+		
+		
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

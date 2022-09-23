@@ -637,6 +637,11 @@
               <FileType>1</FileType>
               <FilePath>..\Drivers\ANO_DT.c</FilePath>
             </File>
+            <File>
+              <FileName>maths.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Drivers\maths.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

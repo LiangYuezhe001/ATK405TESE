@@ -7,7 +7,7 @@ int icc=0;
 float Q_ROLL=0.001;
 float Q_PITCH=0.001;
 
-float Q_Yaw=0.01;
+float Q_Yaw=0.01,kk=0.15,Compound_G=0;
 
 float R_ROLL=0.1;//
 float R_PITCH=0.1;
@@ -20,7 +20,7 @@ float oyaw,fyaw,dyaw,yaw_bias;
 float DeltaPitch;
 float DeltaRoll;
 float DeltaYaw;
-extern float Compound_G;
+
 /* 说明： */
 /* 1.陀螺仪y轴指向正方向，绕y轴的角是Roll角，绕x轴的角是Pitch角 */
 
@@ -58,8 +58,8 @@ void KalmanCalculation(axis* gyro ,axis* acc_real,float* pitch_out,float* roll_o
     Pitch_tan=acc_real->y/(sqrt(acc_real->x*acc_real->x+acc_real->z*acc_real->z));
     Roll_tan=acc_real->x/(sqrt(acc_real->y*acc_real->y+acc_real->z*acc_real->z));
 	
-    Pitch_z = (atan(Pitch_tan)) * 180 / 3.1415;
-    Roll_z =-(atan(Roll_tan)) * 180 / 3.1415;
+    Pitch_z = (atan(Pitch_tan)) * 180 / 3.1415f;
+    Roll_z =-(atan(Roll_tan)) * 180 / 3.1415f;
     Yaw_z += (gyro->z-yaw_bias)*yaw_dt;
 
 
@@ -97,28 +97,66 @@ void KalmanCalculation(axis* gyro ,axis* acc_real,float* pitch_out,float* roll_o
     //输出
 		fyaw = 0.8*oyaw+0.2*Pitch_hat_pos;
     oyaw=fyaw;
-    *pitch_out = Pitch_hat_pos;
+    *pitch_out = fyaw;
     *roll_out = Roll_hat_pos;
    // Yaw_Kalman =Yaw_hat_pos;
 	 
-		Pitch_Diff_R=ABs(fyaw-Pitch_z);
-		Pitch_Diff_Q=ABs(fyaw-Pitch_hat_pri);
-		to_Pitch_Diff_Q+=Pitch_Diff_Q;
-		to_Pitch_Diff_R+=Pitch_Diff_R;
-		if(icc>=19)
-		{	to_Pitch_Diff_Q/=100;
-			to_Pitch_Diff_R/=20;
-			//Q_PITCH=0.9*Q_PITCH+0.1*limit(to_Pitch_Diff_Q*to_Pitch_Diff_Q);
-			R_PITCH=0.8*R_PITCH+0.2*limit(to_Pitch_Diff_R*to_Pitch_Diff_R);
-			to_Pitch_Diff_Q=0;
-			to_Pitch_Diff_R=0;
-			icc=0;
-		}
-		icc++;
+//		Pitch_Diff_R=ABs(fyaw-Pitch_z);
+//		Pitch_Diff_Q=ABs(fyaw-Pitch_hat_pri);
+//		to_Pitch_Diff_Q+=Pitch_Diff_Q;
+//		to_Pitch_Diff_R+=Pitch_Diff_R;
+//		if(icc>=19)
+//		{	to_Pitch_Diff_Q/=100;
+//			to_Pitch_Diff_R/=20;
+//			//Q_PITCH=0.9*Q_PITCH+0.1*limit(to_Pitch_Diff_Q*to_Pitch_Diff_Q);
+//			R_PITCH=0.8*R_PITCH+0.2*limit(to_Pitch_Diff_R*to_Pitch_Diff_R);
+//			to_Pitch_Diff_Q=0;
+//			to_Pitch_Diff_R=0;
+//			icc=0;
+//		}
+//		icc++;
 
 }
+void complementary_filter(axis* gyro ,axis* acc_real,float* pitch_out,float* roll_out)
+{
+	Compound_G = acc_real->x*acc_real->x + acc_real->y*acc_real->y + acc_real->z*acc_real->z;
+	Pitch_tan=acc_real->y/(sqrt(acc_real->x*acc_real->x+acc_real->z*acc_real->z));
+    Roll_tan=acc_real->x/(sqrt(acc_real->y*acc_real->y+acc_real->z*acc_real->z));
+		if(Compound_G>=1.1)kk=0;
+		else kk=0.15;
+    Pitch_z = (atan(Pitch_tan)) * 180 / 3.1415f;
+    Roll_z =-(atan(Roll_tan)) * 180 / 3.1415f;
+	
+    Pitch_hat_pri = 1 * Pitch_hat_pos + gyro->x*dt;
+    Roll_hat_pri = 1 * Roll_hat_pos +  gyro->y*dt;
+    Yaw_hat_pri = 1 * Yaw_hat_pos + dyaw*yaw_dt ;
 
+		Pitch_hat_pos = Pitch_hat_pri + kk*(Pitch_z-Pitch_hat_pri);
+    Roll_hat_pos = Roll_hat_pri + kk*(Roll_z-Roll_hat_pri);
+	
+		
+		*pitch_out = Pitch_hat_pos;
+    *roll_out = Roll_hat_pos;
+	
+}
 
+t_fp_vector_def rotate(axis* acc, float pitch_in,float roll_in)
+{
+	fp_angles_t body_angle;
+	t_fp_vector_def acc_vector;
+	
+		acc_vector.Y = acc->x;
+    acc_vector.X = acc->y;
+    acc_vector.Z = acc->z;
+	
+		body_angle.angles.pitch = pitch_in * DEG2RAD;
+    body_angle.angles.yaw = 0;
+    body_angle.angles.roll = roll_in * DEG2RAD;
+	
+	rotateV(&acc_vector, &body_angle);
+	 return acc_vector;
+	
+}
 
 
 

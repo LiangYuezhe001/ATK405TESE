@@ -2,6 +2,7 @@
 405\kalman.o: ..\Drivers\kalman.h
 405\kalman.o: ..\Drivers\mpu6000.h
 405\kalman.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+405\kalman.o: ..\Drivers\maths.h
 405\kalman.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 405\kalman.o: ..\Drivers\ANO_DT.h
 405\kalman.o: ../Inc/main.h

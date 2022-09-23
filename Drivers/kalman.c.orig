@@ -1,21 +1,26 @@
 #include "kalman.h"
 #include "math.h"
 #include "ANO_DT.h"
-
+#include "maths.h"
 //extern float pitch, roll;
-float Q_ROLL=0.01;
-float Q_PITCH=0.01;
-float Q_Yaw=0.1;
-float R_ROLL=0.1;
+int icc=0;
+float Q_ROLL=0.001;
+float Q_PITCH=0.001;
+
+float Q_Yaw=0.01,kk=0.15,Compound_G=0;
+
+float R_ROLL=0.1;//
 float R_PITCH=0.1;
+
 float R_Yaw=0.1;
-float dt=0.005;
+
+float dt=0.0017;
 float yaw_dt=0.01;
 float oyaw,fyaw,dyaw,yaw_bias;
 float DeltaPitch;
 float DeltaRoll;
 float DeltaYaw;
-extern float Compound_G;
+
 /* Àµ√˜£∫ */
 /* 1.Õ”¬›“«y÷·÷∏œÚ’˝∑ΩœÚ£¨»∆y÷·µƒΩ« «RollΩ«£¨»∆x÷·µƒΩ« «PitchΩ« */
 
@@ -28,42 +33,39 @@ float Roll_hat_pos=0,Pitch_hat_pos=0,Yaw_hat_pos=0;               // Ω«∂»∫Û—Èπ¿º
 float P_Roll_hat_pri=0,P_Pitch_hat_pri=0,P_Yaw_hat_pri=0;           // ∑Ω≤Óœ»—Èπ¿º∆
 float P_Roll_hat_pos=0,P_Pitch_hat_pos=0,P_Yaw_hat_pos=0;           // ∑Ω≤Ó∫Û—Èπ¿º∆
 float KalmanGain_Pitch,KalmanGain_Roll,KalmanGain_Yaw;             // ø®∂˚¬¸‘ˆ“Ê
+float Roll_Diff_Q=0,Pitch_Diff_Q=0,Roll_Diff_R=0,Pitch_Diff_R=0,to_Roll_Diff_R=0,to_Pitch_Diff_R=0,to_Roll_Diff_Q=0,to_Pitch_Diff_Q=0;
 
-
-
-void KalmanCalculation(float*gyro ,float* acc_real)
+float ABs(float a)
+{
+	return a < 0 ? -a : a;
+}
+float limit(float a)
+{
+	if(a>=3)a=3;
+	if(a<=0.001f)a=0.001;
+	return a;
+}
+float limit2(float a)
+{
+	if(a<=0.1f)a=0.1;
+	return a;
+}
+void KalmanCalculation(axis* gyro ,axis* acc_real,float* pitch_out,float* roll_out)
 {
     /*-----------------------------------------ø®∂˚¬¸¬À≤®--------------------------------------------------*/
 
     // ≤Œ ˝Àµ√˜£∫A=1£¨B=dt£¨øÿ÷∆¡ø=Ω«ÀŸ∂»£¨π€≤‚÷µ÷±Ω”≤‚µ√Ω«∂»H=1£¨
-    Pitch_tan=acc_real[1]/(sqrt(acc_real[0]*acc_real[0]+acc_real[2]*acc_real[2]));
-    Roll_tan=acc_real[0]/(sqrt(acc_real[1]*acc_real[1]+acc_real[2]*acc_real[2]));
+    Pitch_tan=acc_real->y/(sqrt(acc_real->x*acc_real->x+acc_real->z*acc_real->z));
+    Roll_tan=acc_real->x/(sqrt(acc_real->y*acc_real->y+acc_real->z*acc_real->z));
 	
-    Pitch_z = (atan(Pitch_tan)) * 180 / 3.1415;
-    Roll_z =-(atan(Roll_tan)) * 180 / 3.1415;
-    Yaw_z += (gyro[2]-yaw_bias)*yaw_dt;
+    Pitch_z = (atan(Pitch_tan)) * 180 / 3.1415f;
+    Roll_z =-(atan(Roll_tan)) * 180 / 3.1415f;
+    Yaw_z += (gyro->z-yaw_bias)*yaw_dt;
 
-    // DYNAMIC R/Q
-    //R_PITCH=0.6*(ABs(DeltaPitch)*10+0.5);
-    //	Q_PITCH=0.001/(ABs(DeltaPitch)*10+0.5);
-    //R_ROLL=0.6*(ABs(DeltaRoll)*10+0.5);
-//    if(Abs(Compound_G)>=1.2)
-//    {
-//        KalmanGain_Pitch=0;
-//        KalmanGain_Roll=0;
-//    }
-    if(DeltaPitch>=0.2)KalmanGain_Pitch=0;
-    if(DeltaRoll>=0.2)KalmanGain_Roll=0;
-
-
-    //filter of yaw
-    fyaw = 0.9*oyaw+0.1*Yaw_z;
-    dyaw=fyaw-oyaw;
-    oyaw=fyaw;
 
     // ‘§≤‚£∫±æ¥ŒΩ«∂»œ»—Èπ¿º∆ = ◊™“∆æÿ’Û * …œ¥ŒΩ«∂»∫Û—Èπ¿º∆ + øÿ÷∆¡ø
-    Pitch_hat_pri = 1 * Pitch_hat_pos + gyro[0]*dt;
-    Roll_hat_pri = 1 * Roll_hat_pos +  gyro[1]*dt;
+    Pitch_hat_pri = 1 * Pitch_hat_pos + gyro->x*dt;
+    Roll_hat_pri = 1 * Roll_hat_pos +  gyro->y*dt;
     Yaw_hat_pri = 1 * Yaw_hat_pos + dyaw*yaw_dt ;
 
     // ‘§≤‚£∫±æ¥Œ∑Ω≤Óœ»—Èπ¿º∆ = ◊™“∆æÿ’Û * …œ¥Œ∑Ω≤Ó∫Û—Èπ¿º∆ * ◊™“∆æÿ’Û◊™÷√ + Q
@@ -77,6 +79,7 @@ void KalmanCalculation(float*gyro ,float* acc_real)
     KalmanGain_Yaw = (P_Yaw_hat_pri)/(P_Yaw_hat_pri+R_Yaw);
 
     // ∏¸–¬£∫º∆À„∫Û—Èπ¿º∆
+		
     Pitch_hat_pos = Pitch_hat_pri + KalmanGain_Pitch*(Pitch_z-Pitch_hat_pri);
     Roll_hat_pos = Roll_hat_pri + KalmanGain_Roll*(Roll_z-Roll_hat_pri);
     Yaw_hat_pos = Yaw_hat_pri + KalmanGain_Yaw*(Yaw_z-Yaw_hat_pri);
@@ -86,18 +89,74 @@ void KalmanCalculation(float*gyro ,float* acc_real)
     P_Roll_hat_pos = (1-KalmanGain_Roll)*P_Roll_hat_pri;
     P_Yaw_hat_pos = (1-KalmanGain_Yaw)*P_Yaw_hat_pri;
 
-
-    DeltaPitch = (-Pitch_hat_pos)-Pitch_Kalman;                         // Œ™¡À∑Ω±„PID∂¯Ω¯––µƒŒ¢∑÷‘ÀÀ„
+    // Œ™¡À∑Ω±„PID∂¯Ω¯––µƒŒ¢∑÷‘ÀÀ„
+    DeltaPitch = (-Pitch_hat_pos)-Pitch_Kalman;                         
     DeltaRoll = (-Roll_hat_pos)-Roll_Kalman;
     DeltaYaw= (-Yaw_hat_pos)-Yaw_Kalman;
-    Pitch_Kalman = Pitch_hat_pos;
-    Roll_Kalman = Roll_hat_pos;
-    Yaw_Kalman =Yaw_hat_pos;
 
+    // ‰≥ˆ
+		fyaw = 0.8*oyaw+0.2*Pitch_hat_pos;
+    oyaw=fyaw;
+    *pitch_out = fyaw;
+    *roll_out = Roll_hat_pos;
+   // Yaw_Kalman =Yaw_hat_pos;
+	 
+//		Pitch_Diff_R=ABs(fyaw-Pitch_z);
+//		Pitch_Diff_Q=ABs(fyaw-Pitch_hat_pri);
+//		to_Pitch_Diff_Q+=Pitch_Diff_Q;
+//		to_Pitch_Diff_R+=Pitch_Diff_R;
+//		if(icc>=19)
+//		{	to_Pitch_Diff_Q/=100;
+//			to_Pitch_Diff_R/=20;
+//			//Q_PITCH=0.9*Q_PITCH+0.1*limit(to_Pitch_Diff_Q*to_Pitch_Diff_Q);
+//			R_PITCH=0.8*R_PITCH+0.2*limit(to_Pitch_Diff_R*to_Pitch_Diff_R);
+//			to_Pitch_Diff_Q=0;
+//			to_Pitch_Diff_R=0;
+//			icc=0;
+//		}
+//		icc++;
 
 }
+void complementary_filter(axis* gyro ,axis* acc_real,float* pitch_out,float* roll_out)
+{
+	Compound_G = acc_real->x*acc_real->x + acc_real->y*acc_real->y + acc_real->z*acc_real->z;
+	Pitch_tan=acc_real->y/(sqrt(acc_real->x*acc_real->x+acc_real->z*acc_real->z));
+    Roll_tan=acc_real->x/(sqrt(acc_real->y*acc_real->y+acc_real->z*acc_real->z));
+		if(Compound_G>=1.1)kk=0;
+		else kk=0.15;
+    Pitch_z = (atan(Pitch_tan)) * 180 / 3.1415f;
+    Roll_z =-(atan(Roll_tan)) * 180 / 3.1415f;
+	
+    Pitch_hat_pri = 1 * Pitch_hat_pos + gyro->x*dt;
+    Roll_hat_pri = 1 * Roll_hat_pos +  gyro->y*dt;
+    Yaw_hat_pri = 1 * Yaw_hat_pos + dyaw*yaw_dt ;
 
+		Pitch_hat_pos = Pitch_hat_pri + kk*(Pitch_z-Pitch_hat_pri);
+    Roll_hat_pos = Roll_hat_pri + kk*(Roll_z-Roll_hat_pri);
+	
+		
+		*pitch_out = Pitch_hat_pos;
+    *roll_out = Roll_hat_pos;
+	
+}
 
+t_fp_vector_def rotate(axis* acc, float pitch_in,float* roll_in)
+{
+	fp_angles_t body_angle;
+	t_fp_vector_def acc_vector;
+	
+		acc_vector.Y = acc->x;
+    acc_vector.X = acc->y;
+    acc_vector.Z = acc->z;
+	
+		body_angle.angles.pitch = Pitch_Kalman * DEG2RAD;
+    body_angle.angles.yaw = 0;
+    body_angle.angles.roll = Roll_Kalman * DEG2RAD;
+	
+	rotateV(&acc_vector, &body_angle);
+	 return acc_vector;
+	
+}
 
 
 
